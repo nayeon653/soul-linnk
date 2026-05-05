@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Building Your Future Network 🍀</title>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════
+   VARIABLES & RESET
+══════════════════════════════════ */
+:root {
+  --mint:    #3ecfb2;
+  --mint2:   #6ee7ce;
+  --mintl:   #b8f5e8;
+  --green:   #2db896;
+  --greend:  #1a7a62;
+  --white:   #ffffff;
+  --off:     #f4fdf9;
+  --card:    #edfaf4;
+  --border:  #c8efe2;
+  --text:    #1c4a3a;
+  --sub:     #7abfaa;
+  --muted:   #aad4c6;
+  --shadow:  rgba(62,207,178,0.18);
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+html, body { width:100%; height:100%; overflow:hidden; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #f0fdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ══════════════════════════════════
+   BACKGROUND
+══════════════════════════════════ */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 5% 0%, rgba(62,207,178,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 95% 95%, rgba(62,207,178,0.12) 0%, transparent 50%),
+    linear-gradient(160deg, #f4fefb 0%, #e8faf3 100%);
+  z-index:0; pointer-events:none;
+}
+
+/* ══════════════════════════════════
+   APP SHELL
+══════════════════════════════════ */
+.app {
+  position: relative; z-index:1;
+  width: min(520px, 100vw);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════
+   SCREENS
+══════════════════════════════════ */
+.screen {
+  position: absolute; inset:0;
+  display: flex; flex-direction: column;
+  padding: 0;
+  opacity:0; pointer-events:none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  transform: translateY(16px);
+  overflow-y: auto;
+}
+.screen.active {
+  opacity:1; pointer-events:all;
+  transform: translateY(0);
+}
+.screen.exit {
+  opacity:0; transform: translateY(-16px);
+}
+
+/* ══════════════════════════════════
+   SCREEN 0 — INTRO
+══════════════════════════════════ */
+#s-intro {
+  align-items: center;
+  justify-content: center;
+  padding: 48px 36px;
+  gap: 0;
+  text-align: center;
+}
+
+.intro-badge {
+  font-size: 10px;
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: var(--mint);
+  background: rgba(62,207,178,0.12);
+  border: 1px solid rgba(62,207,178,0.28);
+  padding: 7px 18px;
+  border-radius: 20px;
+  margin-bottom: 36px;
+}
+
+.intro-clover {
+  margin-bottom: 28px;
+  filter: drop-shadow(0 10px 28px rgba(62,207,178,0.38));
+}
+
+.intro-title {
+  font-family: 'Gaegu', cursive;
+  font-size: clamp(58px, 14vw, 80px);
+  font-weight: 700;
+  line-height: 0.95;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.intro-title .g {
+  background: linear-gradient(135deg, #3ecfb2 0%, #1a8a72 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.intro-sub {
+  font-size: 14px;
+  color: var(--sub);
+  line-height: 1.8;
+  margin-bottom: 44px;
+}
+
+.intro-btn {
+  width: 100%;
+  border: none; cursor: pointer;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(62,207,178,0.38);
+  position: relative;
+  margin-bottom: 32px;
+}
+.intro-btn-inner {
+  background: linear-gradient(155deg, #4adcc0 0%, #2db896 100%);
+  padding: 20px;
+  font-family: 'Gaegu', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 2px;
+  position: relative;
+}
+.intro-btn-inner::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+  border-radius: 22px 22px 0 0;
+}
+
+.intro-hearts {
+  display: flex; gap: 12px; align-items: center; justify-content: center;
+}
+
+/* ══════════════════════════════════
+   SCREEN Q — QUESTION
+══════════════════════════════════ */
+#s-quiz {
+  padding: 0;
+  justify-content: flex-start;
+}
+
+.quiz-header {
+  padding: 52px 32px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.quiz-logo {
+  font-family: 'Gaegu', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--mint);
+}
+
+.prog-wrap { display:flex; align-items:center; gap:10px; }
+.prog-track {
+  width: 110px; height: 6px;
+  background: #ddf4ec;
+  border-radius: 6px; overflow:hidden;
+}
+.prog-fill {
+  height:100%;
+  background: linear-gradient(90deg, var(--mint2), var(--mint));
+  border-radius: 6px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 6px rgba(62,207,178,0.45);
+}
+.prog-num { font-size: 12px; color: var(--muted); font-weight: 600; }
+
+.quiz-body {
+  padding: 8px 32px 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.q-eyebrow {
+  font-size: 10px; letter-spacing: 3px;
+  font-weight: 700; color: var(--mint);
+  margin-bottom: 10px;
+}
+.q-title {
+  font-family: 'Gaegu', cursive;
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.q-hint { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+
+.options { display:flex; flex-direction:column; gap:11px; }
+
+.opt {
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  background: white;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  -webkit-user-select: none; user-select: none;
+  box-shadow: 0 2px 8px rgba(62,207,178,0.06);
+}
+.opt:active { transform: scale(0.98); }
+.opt.sel {
+  background: linear-gradient(135deg, #edfaf4, #d8f5ec);
+  border-color: var(--mint);
+  box-shadow: 0 4px 16px rgba(62,207,178,0.2);
+}
+
+.opt-dot {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.18s;
+}
+.opt.sel .opt-dot {
+  border-color: var(--mint);
+  background: var(--mint);
+}
+.opt.sel .opt-dot::after {
+  content:'';
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:7px; height:7px;
+  background: white; border-radius:50%;
+}
+
+.opt-label { font-size: 15px; font-weight: 500; color: var(--sub); }
+.opt.sel .opt-label { color: var(--text); font-weight: 700; }
+
+/* text input */
+.text-input {
+  width: 100%;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  background: white;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+  box-shadow: 0 2px 8px rgba(62,207,178,0.06);
+}
+.text-input:focus { border-color: var(--mint); box-shadow: 0 4px 16px rgba(62,207,178,0.18); }
+.text-input::placeholder { color: var(--muted); }
+
+.quiz-footer {
+  padding: 20px 32px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.btn-back {
+  padding: 14px 24px;
+  border-radius: 14px;
+  border: 1.5px solid var(--border);
+  background: white;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-back:active { transform: scale(0.97); }
+
+.btn-next {
+  padding: 16px 36px;
+  border-radius: 18px;
+  border: none;
+  background: linear-gradient(155deg, #4adcc0, #2db896);
+  font-family: 'Gaegu', cursive;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(62,207,178,0.35);
+  position: relative; overflow: hidden;
+  transition: all 0.18s;
+}
+.btn-next::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:50%;
+  background: rgba(255,255,255,0.22);
+  border-radius: 18px 18px 0 0;
+}
+.btn-next:active { transform: scale(0.97); }
+.btn-next:disabled { opacity:0.4; cursor:not-allowed; }
+
+/* ══════════════════════════════════
+   SCREEN — LOADING
+══════════════════════════════════ */
+#s-loading {
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  text-align: center;
+  padding: 40px;
+}
+
+.loading-clover {
+  animation: spinBounce 1.4s ease-in-out infinite;
+  filter: drop-shadow(0 8px 20px rgba(62,207,178,0.4));
+}
+@keyframes spinBounce {
+  0%,100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(15deg) scale(1.08); }
+  75% { transform: rotate(-15deg) scale(1.08); }
+}
+
+.loading-title {
+  font-family: 'Gaegu', cursive;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.loading-dots {
+  display: flex; gap: 8px; justify-content: center;
+}
+.loading-dots span {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--mint);
+  animation: dotBounce 1.2s ease-in-out infinite;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dotBounce {
+  0%,80%,100% { transform: scale(0.6); opacity:0.4; }
+  40% { transform: scale(1.2); opacity:1; }
+}
+
+/* ══════════════════════════════════
+   SCREEN — RESULT
+══════════════════════════════════ */
+#s-result {
+  padding: 52px 28px 48px;
+  align-items: stretch;
+  gap: 0;
+  overflow-y: auto;
+}
+
+.result-top {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.result-eyebrow {
+  font-size: 10px; letter-spacing: 3px;
+  font-weight: 700; color: var(--mint);
+}
+.result-title {
+  font-family: 'Gaegu', cursive;
+  font-size: clamp(26px, 6vw, 36px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+.result-title span { color: var(--mint); }
+
+.match-list { display:flex; flex-direction:column; gap:12px; margin-bottom:18px; }
+
+.mcard {
+  padding: 16px 18px;
+  border-radius: 18px;
+  display: flex; align-items: center; gap: 14px;
+  transition: transform 0.2s;
+}
+.mcard:active { transform: scale(0.99); }
+
+.mcard.r1 {
+  background: linear-gradient(135deg, #e0f9f1, #cbf5e6);
+  border: 1.5px solid var(--mint);
+  box-shadow: 0 6px 22px rgba(62,207,178,0.2);
+}
+.mcard.r2 { background: var(--card); border: 1.5px solid var(--border); }
+.mcard.r3 { background: #fafffe; border: 1px solid #e4f5ee; }
+
+.rank-badge {
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  display: flex; align-items:center; justify-content:center;
+  font-family: 'Gaegu', cursive;
+  font-size: 18px; font-weight: 700;
+  flex-shrink: 0;
+}
+.r1 .rank-badge {
+  background: linear-gradient(135deg, #3ecfb2, #2db896);
+  color: white;
+  box-shadow: 0 4px 12px rgba(62,207,178,0.4);
+}
+.r2 .rank-badge { background: #d4f0e6; color: var(--mint); }
+.r3 .rank-badge { background: #eef8f4; color: var(--muted); }
+
+.mcard-info { flex:1; min-width:0; }
+.mcard-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.mcard-insta { font-size: 11px; color: var(--mint); font-weight: 700; margin-top: 3px; }
+.mcard-tags { font-size: 11px; color: var(--sub); white-space: nowrap; overflow:hidden; text-overflow: ellipsis; }
+.mcard-pct {
+  font-family: 'Gaegu', cursive;
+  font-size: 22px; font-weight: 700; flex-shrink:0;
+}
+.r1 .mcard-pct { color: var(--mint); }
+.r2 .mcard-pct { color: var(--sub); font-size:19px; }
+.r3 .mcard-pct { color: var(--muted); font-size:17px; }
+
+.msg-card {
+  padding: 16px 18px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+.msg-label {
+  font-size: 9px; letter-spacing: 2px;
+  font-weight: 700; color: var(--mint);
+  margin-bottom: 8px;
+}
+.msg-text { font-size: 13px; color: var(--text); line-height: 1.75; }
+
+.result-actions { display:flex; flex-direction:column; gap:10px; }
+
+.btn-restart {
+  padding: 17px;
+  border-radius: 18px;
+  border: none;
+  background: linear-gradient(155deg, #4adcc0, #2db896);
+  font-family: 'Gaegu', cursive;
+  font-size: 18px; font-weight: 700; color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(62,207,178,0.32);
+  position: relative; overflow:hidden;
+  transition: all 0.18s;
+}
+.btn-restart::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:50%;
+  background: rgba(255,255,255,0.22);
+  border-radius: 18px 18px 0 0;
+}
+.btn-restart:active { transform: scale(0.98); }
+
+.result-hearts {
+  display: flex; justify-content: center; gap: 10px;
+  padding-top: 8px;
+}
+
+/* ══════════════════════════════════
+   SHARED SVG HELPERS
+══════════════════════════════════ */
+.clover-icon { filter: drop-shadow(0 4px 12px rgba(62,207,178,0.35)); }
+.heart-icon  { filter: drop-shadow(0 3px 8px rgba(62,207,178,0.35)); }
+
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ════════════ INTRO ════════════ -->
+  <div class="screen active" id="s-intro">
+
+    <div class="intro-badge">EWHA AI × 인공지능대학 행사</div>
+
+    <!-- 3D Glossy Clover SVG -->
+    <div class="intro-clover">
+      <svg width="130" height="130" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- 잎사귀 베이스 그라디언트 -->
+          <radialGradient id="leaf1" cx="38%" cy="28%" r="68%">
+            <stop offset="0%" stop-color="#8eecd4"/>
+            <stop offset="40%" stop-color="#3ecfb2"/>
+            <stop offset="80%" stop-color="#1f9e7a"/>
+            <stop offset="100%" stop-color="#156b52"/>
+          </radialGradient>
+          <!-- 잎사귀 하이라이트 -->
+          <radialGradient id="shine" cx="30%" cy="18%" r="50%">
+            <stop offset="0%" stop-color="white" stop-opacity="0.85"/>
+            <stop offset="60%" stop-color="white" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="white" stop-opacity="0"/>
+          </radialGradient>
+          <!-- 테두리 그라디언트 -->
+          <linearGradient id="border" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#c8f5e4"/>
+            <stop offset="50%" stop-color="#1a7a5e"/>
+            <stop offset="100%" stop-color="#0e5040"/>
+          </linearGradient>
+          <!-- 중앙 그라디언트 -->
+          <radialGradient id="center" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#5ee0c0"/>
+            <stop offset="100%" stop-color="#0e6e52"/>
+          </radialGradient>
+          <!-- 줄기 그라디언트 -->
+          <linearGradient id="stem" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#c8f5e4"/>
+            <stop offset="50%" stop-color="#2db896"/>
+            <stop offset="100%" stop-color="#0e6e52"/>
+          </linearGradient>
+          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1a8a72" flood-opacity="0.35"/>
+          </filter>
+        </defs>
+
+        <g filter="url(#shadow)">
+          <!-- 왼쪽 위 잎 -->
+          <ellipse cx="68" cy="62" rx="36" ry="36" fill="url(#leaf1)" stroke="url(#border)" stroke-width="2"/>
+          <ellipse cx="68" cy="62" rx="36" ry="36" fill="url(#shine)"/>
+          <!-- 오른쪽 위 잎 -->
+          <ellipse cx="132" cy="62" rx="36" ry="36" fill="url(#leaf1)" stroke="url(#border)" stroke-width="2"/>
+          <ellipse cx="132" cy="62" rx="36" ry="36" fill="url(#shine)"/>
+          <!-- 왼쪽 아래 잎 -->
+          <ellipse cx="68" cy="118" rx="36" ry="36" fill="url(#leaf1)" stroke="url(#border)" stroke-width="2"/>
+          <ellipse cx="68" cy="118" rx="36" ry="36" fill="url(#shine)"/>
+          <!-- 오른쪽 아래 잎 -->
+          <ellipse cx="132" cy="118" rx="36" ry="36" fill="url(#leaf1)" stroke="url(#border)" stroke-width="2"/>
+          <ellipse cx="132" cy="118" rx="36" ry="36" fill="url(#shine)"/>
+          <!-- 잎 사이 홈 라인 -->
+          <line x1="100" y1="48" x2="100" y2="148" stroke="#156b52" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <line x1="54" y1="90" x2="146" y2="90" stroke="#156b52" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <!-- 중앙 원 -->
+          <circle cx="100" cy="90" r="16" fill="url(#center)" stroke="#0e5040" stroke-width="1.5"/>
+          <ellipse cx="95" cy="85" rx="6" ry="4" fill="rgba(255,255,255,0.5)"/>
+          <!-- 줄기 -->
+          <path d="M100 148 Q108 162 104 178" stroke="url(#stem)" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M100 148 Q108 162 104 178" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="intro-title" style="font-size:clamp(28px,7vw,46px); line-height:1.15; margin-bottom:10px;">Building Your<br><span class="g">Future Network</span></div>
+    <div class="intro-sub">나와 꼭 맞는 AI 동료를 찾아드려요 🍀<br>몇 가지만 알려주세요!</div>
+
+    <button class="intro-btn" onclick="startQuiz()">
+      <div class="intro-btn-inner">시작하기 →</div>
+    </button>
+
+    <div class="intro-hearts">
+      <svg class="heart-icon" width="30" height="28" viewBox="0 0 30 28"><defs><radialGradient id="hg0" cx="35%" cy="25%" r="65%"><stop offset="0%" stop-color="#b8f5e8"/><stop offset="60%" stop-color="#3ecfb2"/><stop offset="100%" stop-color="#1a8a72"/></radialGradient></defs><path d="M15 25S2 16.5 2 9a7 7 0 0 1 13-3.5A7 7 0 0 1 28 9c0 7.5-13 16-13 16z" fill="url(#hg0)"/><ellipse cx="10" cy="9" rx="4" ry="2.5" fill="rgba(255,255,255,0.55)" transform="rotate(-20 10 9)"/></svg>
+      <svg class="heart-icon" width="22" height="20" viewBox="0 0 30 28"><path d="M15 25S2 16.5 2 9a7 7 0 0 1 13-3.5A7 7 0 0 1 28 9c0 7.5-13 16-13 16z" fill="#b8f5e8"/><ellipse cx="10" cy="9" rx="4" ry="2.5" fill="rgba(255,255,255,0.6)" transform="rotate(-20 10 9)"/></svg>
+      <svg class="heart-icon" width="34" height="32" viewBox="0 0 30 28"><path d="M15 25S2 16.5 2 9a7 7 0 0 1 13-3.5A7 7 0 0 1 28 9c0 7.5-13 16-13 16z" fill="url(#hg0)"/><ellipse cx="10" cy="9" rx="4" ry="2.5" fill="rgba(255,255,255,0.55)" transform="rotate(-20 10 9)"/></svg>
+    </div>
+
+  </div>
+
+  <!-- ════════════ QUIZ ════════════ -->
+  <div class="screen" id="s-quiz">
+
+    <div class="quiz-header">
+      <div class="quiz-logo">🍀 SOUL LINK</div>
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+        <div class="prog-num" id="prog-num">1 / 9</div>
+      </div>
+    </div>
+
+    <div class="quiz-body">
+      <div class="q-eyebrow" id="q-eyebrow">Q U E S T I O N · 01</div>
+      <div class="q-title" id="q-title">질문</div>
+      <div class="q-hint" id="q-hint">힌트</div>
+      <div class="options" id="q-options"></div>
+    </div>
+
+    <div class="quiz-footer">
+      <button class="btn-back" id="btn-back" onclick="prevQ()">← 이전</button>
+      <button class="btn-next" id="btn-next" onclick="nextQ()">다음으로 →</button>
+    </div>
+
+  </div>
+
+  <!-- ════════════ LOADING ════════════ -->
+  <div class="screen" id="s-loading">
+    <div class="loading-clover">
+      <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
+        <ellipse cx="32" cy="28" rx="19" ry="19" fill="#3ecfb2"/>
+        <ellipse cx="68" cy="28" rx="19" ry="19" fill="#3ecfb2"/>
+        <ellipse cx="32" cy="62" rx="19" ry="19" fill="#3ecfb2"/>
+        <ellipse cx="68" cy="62" rx="19" ry="19" fill="#3ecfb2"/>
+        <circle cx="50" cy="45" r="13" fill="#2db896"/>
+        <ellipse cx="26" cy="21" rx="7" ry="5" fill="rgba(255,255,255,0.6)"/>
+        <ellipse cx="62" cy="21" rx="7" ry="5" fill="rgba(255,255,255,0.6)"/>
+      </svg>
+    </div>
+    <div class="loading-title">소울메이트 찾는 중... 🍀</div>
+    <div class="loading-dots"><span></span><span></span><span></span></div>
+  </div>
+
+  <!-- ════════════ RESULT ════════════ -->
+  <div class="screen" id="s-result">
+    <div class="result-top">
+      <svg class="clover-icon" width="20" height="20" viewBox="0 0 100 100" fill="none">
+        <ellipse cx="32" cy="28" rx="19" ry="19" fill="#3ecfb2"/>
+        <ellipse cx="68" cy="28" rx="19" ry="19" fill="#3ecfb2"/>
+        <ellipse cx="32" cy="62" rx="19" ry="19" fill="#3ecfb2"/>
+        <ellipse cx="68" cy="62" rx="19" ry="19" fill="#3ecfb2"/>
+        <circle cx="50" cy="45" r="13" fill="#2db896"/>
+      </svg>
+      <div class="result-eyebrow">MATCH RESULT</div>
+    </div>
+
+    <div class="result-title" id="result-title">당신의 AI 동료,<br><span>찾았어요! 🎉</span></div>
+
+    <div class="match-list" id="match-list"></div>
+
+    <div class="msg-card">
+      <div class="msg-label">💬 MATCHING COMMENT</div>
+      <div class="msg-text" id="match-msg"></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-restart" onclick="restart()">↩ 처음으로 돌아가기</button>
+    </div>
+
+    <div class="result-hearts">
+      <svg class="heart-icon" width="26" height="24" viewBox="0 0 30 28"><defs><radialGradient id="hgr" cx="35%" cy="25%" r="65%"><stop offset="0%" stop-color="#b8f5e8"/><stop offset="60%" stop-color="#3ecfb2"/><stop offset="100%" stop-color="#1a8a72"/></radialGradient></defs><path d="M15 25S2 16.5 2 9a7 7 0 0 1 13-3.5A7 7 0 0 1 28 9c0 7.5-13 16-13 16z" fill="url(#hgr)"/><ellipse cx="10" cy="9" rx="4" ry="2.5" fill="rgba(255,255,255,0.55)" transform="rotate(-20 10 9)"/></svg>
+      <svg class="heart-icon" width="20" height="18" viewBox="0 0 30 28"><path d="M15 25S2 16.5 2 9a7 7 0 0 1 13-3.5A7 7 0 0 1 28 9c0 7.5-13 16-13 16z" fill="#b8f5e8"/></svg>
+      <svg class="heart-icon" width="30" height="28" viewBox="0 0 30 28"><path d="M15 25S2 16.5 2 9a7 7 0 0 1 13-3.5A7 7 0 0 1 28 9c0 7.5-13 16-13 16z" fill="url(#hgr)"/><ellipse cx="10" cy="9" rx="4" ry="2.5" fill="rgba(255,255,255,0.55)" transform="rotate(-20 10 9)"/></svg>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+/* ══════════════════════════════════════════════════
+   샘플 학생 데이터
+   ※ 실제 데이터로 교체할 때는 아래 STUDENTS 배열만 수정하세요!
+   각 항목 설명:
+     name       : 이름/닉네임
+     collab     : 협업 스타일 (0=방향제시 1=서포터 2=문제해결 3=소통)
+     want       : 하고싶은것 (0=스터디 1=프로젝트 2=수다 3=커리어)
+     domain     : 관심도메인 (0=바이오 1=경제 2=기후 3=미디어 4=로보틱스)
+     study      : 공부스타일 (0=아침 1=밤)
+     work       : 작업방식 (0=혼자 1=같이)
+     free       : 공강 (0=집 1=외출)
+     stress     : 스트레스 (0=음식 1=자기 2=운동 3=유튜브 4=코딩)
+     career     : 진로 (0=취업 1=연구 2=개발 3=창업 4=대학원 5=미정)
+══════════════════════════════════════════════════ */
+const STUDENTS = [
+  { name:'김민지', insta:'@minji_ai', collab:1, want:0, domain:0, study:1, work:1, free:0, stress:4, career:4 },
+  { name:'이서연', insta:'@seoyeon.dev', collab:2, want:1, domain:1, study:1, work:1, free:1, stress:2, career:2 },
+  { name:'박지우', insta:'@jiwoo_ewha', collab:3, want:2, domain:3, study:0, work:0, free:0, stress:3, career:0 },
+  { name:'최하은', insta:'@haeun_robo', collab:0, want:3, domain:4, study:0, work:0, free:1, stress:0, career:1 },
+  { name:'정나연', insta:'@nayeon_green', collab:1, want:1, domain:2, study:1, work:1, free:0, stress:4, career:4 },
+  { name:'한소희', insta:'@sohee.bio', collab:2, want:0, domain:0, study:1, work:0, free:0, stress:1, career:4 },
+  { name:'윤채원', insta:'@chaewon_media', collab:3, want:2, domain:1, study:0, work:1, free:1, stress:3, career:3 },
+  { name:'임수아', insta:'@sua_climate', collab:1, want:3, domain:2, study:1, work:1, free:0, stress:2, career:1 },
+  { name:'강다은', insta:'@daeun.robot', collab:0, want:1, domain:4, study:0, work:0, free:1, stress:0, career:2 },
+  { name:'오지민', insta:'@jimin_codes', collab:2, want:0, domain:3, study:1, work:1, free:0, stress:4, career:3 },
+];
+
+/* ══════════════════════════════════════════════════
+   질문 정의
+══════════════════════════════════════════════════ */
+const QUESTIONS = [
+  {
+    key: 'name',
+    type: 'text',
+    eyebrow: 'Q U E S T I O N · 01',
+    title: '이름이나 닉네임을\n알려줘요!',
+    hint: '결과 화면에 표시돼요 😊',
+    placeholder: '예) 민지, 클로버 등'
+  },
+  {
+    key: 'insta',
+    type: 'text',
+    eyebrow: 'Q U E S T I O N · 02',
+    title: '인스타그램 아이디를\n알려줘요!',
+    hint: '매칭된 동료에게 공유돼요 📲',
+    placeholder: '예) @soullink_ewha'
+  },
+  {
+    key: 'collab',
+    type: 'single',
+    eyebrow: 'Q U E S T I O N · 03',
+    title: '협업할 때\n나는 어떤 스타일?',
+    hint: '가장 잘 맞는 걸 골라줘요',
+    options: ['방향 제시 리더 🧭', '협력하는 서포터 🤝', '몰입하는 문제 해결자 💡', '소통 능력자 💬']
+  },
+  {
+    key: 'want',
+    type: 'single',
+    eyebrow: 'Q U E S T I O N · 04',
+    title: '소울메이트와\n뭘 하고 싶어요?',
+    hint: '가장 하고 싶은 걸 골라줘요',
+    options: ['스터디 메이트 📚', '프로젝트 파트너 🛠️', '수다 떨 친구 ☕', '커리어 고민을 나눌 동료 🌱']
+  },
+  {
+    key: 'domain',
+    type: 'single',
+    eyebrow: 'Q U E S T I O N · 05',
+    title: '관심 있는\n도메인은?',
+    hint: '가장 흥미로운 분야를 골라줘요',
+    options: ['바이오 헬스 🧬', '경제 📈', '기후테크 🌍', '미디어 🎬', '로보틱스 🤖']
+  },
+  {
+    key: 'study',
+    type: 'single',
+    eyebrow: 'Q U E S T I O N · 06',
+    title: '나의 공부 스타일은?',
+    hint: '솔직하게 골라줘요 😄',
+    options: ['아침형 🌅', '밤형 🌙']
+  },
+  {
+    key: 'work',
+    type: 'single',
+    eyebrow: 'Q U E S T I O N · 07',
+    title: '작업할 때\n선호하는 방식은?',
+    hint: '혼자 vs 같이!',
+    options: ['혼자 집중 🎧', '같이 으쌰으쌰 👯']
+  },
+  {
+    key: 'free',
+    type: 'single',
+    eyebrow: 'Q U E S T I O N · 08',
+    title: '공강 시간엔\n주로 뭐 해요?',
+    hint: '평소 습관대로!',
+    options: ['집에서 쉬기 🛋️', '나가서 외출하기 🚶']
+  },
+  {
+    key: 'stress',
+    type: 'single',
+    eyebrow: 'Q U E S T I O N · 09',
+    title: '스트레스 풀 때\n나는?',
+    hint: '가장 자주 하는 방법!',
+    options: ['음식으로 해소 🍜', '자기 😴', '운동하기 🏃', '유튜브 시청 📺', '코딩으로 풀기 💻']
+  },
+  {
+    key: 'career',
+    type: 'single',
+    eyebrow: 'Q U E S T I O N · 10',
+    title: '졸업 후\n1순위 희망 진로는?',
+    hint: '지금 생각하는 걸 골라줘요',
+    options: ['취업 💼', '연구 🔬', '개발 👩‍💻', '창업 🚀', '대학원 🎓', '미정 🤔']
+  },
+];
+
+/* ══════════════════════════════════════════════════
+   가중치 설정 (항목별 중요도)
+══════════════════════════════════════════════════ */
+const WEIGHTS = {
+  collab: 3,
+  want:   3,
+  domain: 2,
+  study:  1,
+  work:   2,
+  free:   1,
+  stress: 1,
+  career: 2,
+};
+
+/* ══════════════════════════════════════════════════
+   매칭 멘트 생성
+══════════════════════════════════════════════════ */
+const CAREER_LABELS = ['취업','연구','개발','창업','대학원','미정'];
+const DOMAIN_LABELS = ['바이오 헬스','경제','기후테크','미디어','로보틱스'];
+const WANT_LABELS   = ['스터디 메이트','프로젝트 파트너','수다 떨 친구','커리어 고민 동료'];
+
+function getMatchMsg(user, top) {
+  const msgs = [];
+
+  if (user.career === top.career && user.career !== 5) {
+    msgs.push(`둘 다 ${CAREER_LABELS[user.career]}을(를) 꿈꾸고 있네요! 같이 준비해보세요 💪`);
+  }
+  if (user.domain === top.domain) {
+    msgs.push(`${DOMAIN_LABELS[user.domain]} 분야에 진심인 두 분, 대화가 끊이지 않겠는데요? 🤓`);
+  }
+  if (user.study === top.study && user.work === top.work) {
+    const t = user.study === 0 ? '아침형' : '밤형';
+    const w = user.work === 0 ? '혼자 집중' : '같이 으쌰으쌰';
+    msgs.push(`둘 다 ${t}에 ${w} 스타일! 찰떡 공부 파트너예요 ✨`);
+  }
+  if (user.want === top.want) {
+    msgs.push(`${WANT_LABELS[user.want]}로 딱 맞아요! 이건 운명이에요 🍀`);
+  }
+  if (user.collab === top.collab) {
+    const c = ['방향 제시형','서포터형','문제 해결형','소통형'];
+    msgs.push(`둘 다 ${c[user.collab]} 협업 스타일! 함께하면 시너지가 폭발해요 🚀`);
+  }
+  if (user.career === 4 && top.career === 4) {
+    msgs.push(`같이 대학원 준비해보세요. 서로 도움이 될 것 같아요! 🎓`);
+  }
+
+  if (msgs.length === 0) {
+    msgs.push('다른 듯 닮은 두 분, 서로에게 새로운 자극이 될 거예요! 🌟');
+  }
+
+  return msgs[Math.floor(Math.random() * Math.min(msgs.length, 2))];
+}
+
+/* ══════════════════════════════════════════════════
+   매칭 알고리즘
+══════════════════════════════════════════════════ */
+function calcScore(user, student) {
+  let score = 0, total = 0;
+  for (const key of Object.keys(WEIGHTS)) {
+    total += WEIGHTS[key];
+    if (user[key] === student[key]) score += WEIGHTS[key];
+  }
+  return Math.round((score / total) * 100);
+}
+
+/* ══════════════════════════════════════════════════
+   앱 상태
+══════════════════════════════════════════════════ */
+let currentQ = 0;
+let answers  = {};
+let currentScreen = 's-intro';
+
+/* ══════════════════════════════════════════════════
+   화면 전환
+══════════════════════════════════════════════════ */
+function showScreen(id) {
+  const prev = document.getElementById(currentScreen);
+  const next = document.getElementById(id);
+  prev.classList.add('exit');
+  setTimeout(() => {
+    prev.classList.remove('active','exit');
+    next.classList.add('active');
+    currentScreen = id;
+  }, 300);
+}
+
+/* ══════════════════════════════════════════════════
+   퀴즈 시작
+══════════════════════════════════════════════════ */
+function startQuiz() {
+  currentQ = 0;
+  answers  = {};
+  renderQ();
+  showScreen('s-quiz');
+}
+
+/* ══════════════════════════════════════════════════
+   질문 렌더
+══════════════════════════════════════════════════ */
+function renderQ() {
+  const q = QUESTIONS[currentQ];
+  const total = QUESTIONS.length;
+
+  document.getElementById('q-eyebrow').textContent = q.eyebrow;
+  document.getElementById('q-title').innerHTML = q.title.replace(/\n/g,'<br>');
+  document.getElementById('q-hint').textContent = q.hint;
+
+  // progress
+  const pct = ((currentQ) / total) * 100;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-num').textContent = `${currentQ+1} / ${total}`;
+
+  // back btn
+  document.getElementById('btn-back').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+
+  // next btn label
+  document.getElementById('btn-next').textContent = currentQ === total-1 ? '완료! 🍀' : '다음으로 →';
+
+  // render options
+  const box = document.getElementById('q-options');
+  box.innerHTML = '';
+
+  if (q.type === 'text') {
+    const inp = document.createElement('input');
+    inp.className = 'text-input';
+    inp.type = 'text';
+    inp.placeholder = q.placeholder || '';
+    inp.value = answers[q.key] !== undefined ? answers[q.key] : '';
+    inp.oninput = () => { answers[q.key] = inp.value.trim(); updateNextBtn(); };
+    box.appendChild(inp);
+    setTimeout(() => inp.focus(), 100);
+  } else {
+    q.options.forEach((label, i) => {
+      const div = document.createElement('div');
+      div.className = 'opt' + (answers[q.key] === i ? ' sel' : '');
+      div.innerHTML = `<div class="opt-dot"></div><div class="opt-label">${label}</div>`;
+      div.onclick = () => {
+        answers[q.key] = i;
+        box.querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+        div.classList.add('sel');
+        updateNextBtn();
+      };
+      box.appendChild(div);
+    });
+  }
+
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  const q = QUESTIONS[currentQ];
+  const has = q.type === 'text'
+    ? (answers[q.key] && answers[q.key].length > 0)
+    : answers[q.key] !== undefined;
+  document.getElementById('btn-next').disabled = !has;
+}
+
+function nextQ() {
+  const q = QUESTIONS[currentQ];
+  const has = q.type === 'text'
+    ? (answers[q.key] && answers[q.key].length > 0)
+    : answers[q.key] !== undefined;
+  if (!has) return;
+
+  if (currentQ < QUESTIONS.length - 1) {
+    currentQ++;
+    renderQ();
+  } else {
+    showLoading();
+  }
+}
+
+function prevQ() {
+  if (currentQ > 0) { currentQ--; renderQ(); }
+}
+
+/* ══════════════════════════════════════════════════
+   로딩 → 결과
+══════════════════════════════════════════════════ */
+function showLoading() {
+  showScreen('s-loading');
+  setTimeout(showResult, 1800);
+}
+
+function showResult() {
+  // 점수 계산
+  const scored = STUDENTS.map(s => ({
+    ...s,
+    score: calcScore(answers, s)
+  })).sort((a,b) => b.score - a.score).slice(0,3);
+
+  // 결과 타이틀
+  document.getElementById('result-title').innerHTML =
+    `${answers.name || '당신'}의 AI 동료,<br><span>찾았어요! 🎉</span>`;
+
+  // 카드 렌더
+  const list = document.getElementById('match-list');
+  list.innerHTML = '';
+  const ranks = ['r1','r2','r3'];
+  const medals = ['1','2','3'];
+
+  scored.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = `mcard ${ranks[i]}`;
+    card.innerHTML = `
+      <div class="rank-badge">${medals[i]}</div>
+      <div class="mcard-info">
+        <div class="mcard-name">${s.name}</div>
+        <div class="mcard-tags">${DOMAIN_LABELS[s.domain]} · ${s.study===0?'아침형':'밤형'} · ${CAREER_LABELS[s.career]}</div>
+        <div class="mcard-insta">📸 ${s.insta || '비공개'}</div>
+      </div>
+      <div class="mcard-pct">${s.score}%</div>
+    `;
+    list.appendChild(card);
+  });
+
+  // 매칭 멘트
+  document.getElementById('match-msg').innerHTML =
+    '"' + getMatchMsg(answers, scored[0]) + '"';
+
+  showScreen('s-result');
+}
+
+/* ══════════════════════════════════════════════════
+   다시 시작
+══════════════════════════════════════════════════ */
+function restart() {
+  answers = {};
+  currentQ = 0;
+  showScreen('s-intro');
+}
+</script>
+</body>
+</html>
