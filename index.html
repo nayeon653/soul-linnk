@@ -217,7 +217,7 @@ body::before {
 
 .btn-next {
   padding:17px 40px; border-radius:18px; border:none;
-  background:linear-gradient(155deg, #72d4b4, #3aaa88);
+  background:linear-gradient(155deg, #2aaa88, #1a8a68);
   font-family:'Gaegu', cursive;
   font-size:19px; font-weight:700; color:white;
   cursor:pointer;
@@ -346,21 +346,17 @@ body::before {
 .msg-text { font-size:13px; color:var(--text); line-height:1.8; }
 
 .btn-restart {
-  width:100%; padding:18px; border-radius:18px; border:none;
-  background:linear-gradient(155deg, #72d4b4, #3aaa88);
-  font-family:'Gaegu', cursive;
-  font-size:19px; font-weight:700; color:white;
+  width:100%; padding:18px 20px; border-radius:18px; border:none;
+  background:linear-gradient(155deg, #2aaa88, #1a8a68);
+  font-family:'Noto Sans KR', sans-serif;
+  font-size:16px; font-weight:700; color:white;
+  letter-spacing:0; word-break:keep-all;
   cursor:pointer;
-  box-shadow:0 6px 22px rgba(92,200,168,0.32);
-  position:relative; overflow:hidden; transition:all 0.18s;
+  box-shadow:0 6px 22px rgba(42,170,136,0.32);
+  transition:all 0.18s;
   margin-bottom:20px;
 }
-.btn-restart::before {
-  content:''; position:absolute;
-  top:0; left:0; right:0; height:50%;
-  background:rgba(255,255,255,0.22);
-  border-radius:18px 18px 0 0;
-}
+.btn-restart::before { display:none; }
 .btn-restart:active { transform:scale(0.98); }
 
 .result-hearts { display:flex; justify-content:center; gap:12px; }
