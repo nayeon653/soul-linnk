@@ -645,7 +645,14 @@ function nextQ() {
 function prevQ() { if(currentQ>0){ currentQ--; renderQ(); } }
 
 function showResult() {
-  const scored=STUDENTS.map(s=>({...s,score:calcScore(answers,s)})).sort((a,b)=>b.score-a.score).slice(0,3);
+  // 자기 자신 제외 (이름 + 학년 같으면 제외)
+  const filtered = STUDENTS.filter(s =>
+    !(s.name === answers.name && s.grade === answers.grade)
+  );
+  const scored = filtered
+    .map(s=>({...s, score:calcScore(answers,s)}))
+    .sort((a,b)=>b.score-a.score)
+    .slice(0,3);
 
   document.getElementById('result-title').innerHTML=`${answers.name||'당신'}의 AI 동료,<br><span>찾았어요! 🎉</span>`;
 
@@ -658,7 +665,7 @@ function showResult() {
         <div class="top-name">${top.name}</div>
         <div class="top-pct">${top.score}%</div>
       </div>
-      <div class="top-tags">${top.domain} · ${top.study===0?'아침형':'밤형'} · ${top.career}</div>
+      <div class="top-tags">${top.domain} · ${top.career} · ${top.grade}학년</div>
       <div class="top-insta">📸 ${top.insta||'비공개'}</div>
     </div>`;
 
@@ -673,15 +680,33 @@ function showResult() {
       <div class="rank-badge">${rank}</div>
       <div class="mcard-info">
         <div class="mcard-name">${s.name}</div>
-        <div class="mcard-tags">${s.domain} · ${s.study===0?'아침형':'밤형'} · ${s.career}</div>
+        <div class="mcard-tags">${s.domain} · ${s.career} · ${s.grade}학년</div>
         <div class="mcard-insta">📸 ${s.insta||'비공개'}</div>
       </div>
       <div class="mcard-pct">${s.score}%</div>`;
     list.appendChild(d);
   });
 
-  document.getElementById('match-msg').innerHTML='"'+getMatchMsg(answers,top)+'"';
+  document.getElementById('match-msg').innerHTML=getAllMatchMsg(answers, top);
   showScreen('s-result');
+}
+
+function getAllMatchMsg(user, top) {
+  const commons = [];
+  if (user.domain  === top.domain)  commons.push(`${top.domain} 관심 분야`);
+  if (user.want    === top.want)     commons.push(`${top.want} 목적`);
+  if (user.partner === top.partner)  commons.push(`${top.partner} 성향`);
+  if (user.career  === top.career && top.career !== '미정') commons.push(`${top.career} 진로`);
+  if (user.work    === top.work && top.work !== '상황따라') commons.push(`${top.work} 작업 스타일`);
+  if (user.stress  === top.stress)   commons.push(`${top.stress} 스트레스 해소`);
+  const gradeDiff = Math.abs((user.grade||1) - top.grade);
+  if (gradeDiff === 0) commons.push(`${top.grade}학년 동기`);
+  else if (gradeDiff === 1) commons.push(`학년 비슷`);
+
+  if (commons.length === 0) {
+    return '"다른 듯 닮은 두 분, 서로에게 새로운 자극이 될 거예요! 🌟"';
+  }
+  return `"공통점: ${commons.join(' · ')} 🍀<br>함께라면 훨씬 멀리 갈 수 있을 거예요!"`;
 }
 
 function restart() { answers={}; currentQ=0; showScreen('s-intro'); }
