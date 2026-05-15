@@ -701,7 +701,7 @@ function getAllMatchMsg(user, top) {
   if (user.stress  === top.stress)   commons.push(`${top.stress} 스트레스 해소`);
   const gradeDiff = Math.abs((user.grade||1) - top.grade);
   if (gradeDiff === 0) commons.push(`${top.grade}학년 동기`);
-  else if (gradeDiff === 1) commons.push(`학년 비슷`);
+  else if (gradeDiff === 1) commons.push(`비슷한 학년`);
 
   if (commons.length === 0) {
     return '"다른 듯 닮은 두 분, 서로에게 새로운 자극이 될 거예요! 🌟"';
