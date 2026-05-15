@@ -477,53 +477,98 @@ body::before {
      career : 진로 (0=취업 1=연구 2=개발 3=창업 4=대학원 5=미정)
 ══════════════════════════════════════════════════ */
 const STUDENTS = [
-  { name:'김민지', insta:'@minji_ai',      collab:1, want:0, domain:0, study:1, work:1, free:0, stress:4, career:4 },
-  { name:'이서연', insta:'@seoyeon.dev',   collab:2, want:1, domain:1, study:1, work:1, free:1, stress:2, career:2 },
-  { name:'박지우', insta:'@jiwoo_ewha',    collab:3, want:2, domain:3, study:0, work:0, free:0, stress:3, career:0 },
-  { name:'최하은', insta:'@haeun_robo',    collab:0, want:3, domain:4, study:0, work:0, free:1, stress:0, career:1 },
-  { name:'정나연', insta:'@nayeon_green',  collab:1, want:1, domain:2, study:1, work:1, free:0, stress:4, career:4 },
-  { name:'한소희', insta:'@sohee.bio',     collab:2, want:0, domain:0, study:1, work:0, free:0, stress:1, career:4 },
-  { name:'윤채원', insta:'@chaewon_media', collab:3, want:2, domain:1, study:0, work:1, free:1, stress:3, career:3 },
-  { name:'임수아', insta:'@sua_climate',   collab:1, want:3, domain:2, study:1, work:1, free:0, stress:2, career:1 },
-  { name:'강다은', insta:'@daeun.robot',   collab:0, want:1, domain:4, study:0, work:0, free:1, stress:0, career:2 },
-  { name:'오지민', insta:'@jimin_codes',   collab:2, want:0, domain:3, study:1, work:1, free:0, stress:4, career:3 },
+  { name:'김남희', insta:'비공개', want:'커리어', domain:'바이오헬스', work:'혼자', partner:'방향제시', stress:'잠자기', career:'미정', grade:2 },
+  { name:'최다은', insta:'@daeunchoie', want:'커리어', domain:'바이오헬스', work:'상황따라', partner:'방향제시', stress:'운동하기', career:'연구/대학원', grade:1 },
+  { name:'전혜인', insta:'@_hyein_0000', want:'프로젝트', domain:'피지컬AI', work:'상황따라', partner:'문제해결', stress:'영상시청', career:'미정', grade:1 },
+  { name:'허서윤', insta:'@h._.07sy', want:'스터디', domain:'피지컬AI', work:'같이', partner:'방향제시', stress:'잠자기', career:'취업', grade:1 },
+  { name:'한수연', insta:'@suyeon.119', want:'프로젝트', domain:'바이오헬스', work:'상황따라', partner:'방향제시', stress:'잠자기', career:'창업', grade:2 },
+  { name:'조서연', insta:'@seoyeonjo27', want:'커리어', domain:'LLM', work:'같이', partner:'문제해결', stress:'요리', career:'취업', grade:2 },
+  { name:'문서희', insta:'@__m00nn__seohui', want:'스터디', domain:'컴비전', work:'상황따라', partner:'문제해결', stress:'잠자기', career:'연구/대학원', grade:3 },
+  { name:'권보미', insta:'@spring2_k', want:'프로젝트', domain:'피지컬AI', work:'같이', partner:'방향제시', stress:'운동하기', career:'미정', grade:2 },
+  { name:'박채민', insta:'@ch__minnn', want:'스터디', domain:'금융/경제', work:'상황따라', partner:'문제해결', stress:'영상시청', career:'취업', grade:2 },
+  { name:'김정윤', insta:'@mo6o1x', want:'커리어', domain:'금융/경제', work:'같이', partner:'방향제시', stress:'영상시청', career:'취업', grade:2 },
+  { name:'김지유', insta:'@jiyu.u3', want:'스터디', domain:'LLM', work:'상황따라', partner:'아이디어뱅크', stress:'영상시청', career:'연구/대학원', grade:2 },
+  { name:'김나경', insta:'@skruddld', want:'커리어', domain:'컴비전', work:'상황따라', partner:'서포터', stress:'영상시청', career:'미정', grade:2 },
+  { name:'김다빈', insta:'@beanimyo', want:'커리어', domain:'금융/경제', work:'상황따라', partner:'서포터', stress:'잠자기', career:'취업', grade:2 },
+  { name:'황서현', insta:'@hshxyzn', want:'스터디', domain:'컴비전', work:'같이', partner:'서포터', stress:'영상시청', career:'연구/대학원', grade:1 },
+  { name:'김솔민', insta:'@solmang_9', want:'프로젝트', domain:'피지컬AI', work:'상황따라', partner:'서포터', stress:'요리', career:'미정', grade:3 },
+  { name:'박서정', insta:'@sx._jxxng', want:'프로젝트', domain:'피지컬AI', work:'상황따라', partner:'아이디어뱅크', stress:'영상시청', career:'취업', grade:1 },
+  { name:'최혜주', insta:'@chlgulwn', want:'커리어', domain:'LLM', work:'상황따라', partner:'서포터', stress:'영상시청', career:'취업', grade:4 },
+  { name:'김단아', insta:'@ekssdkk', want:'스터디', domain:'LLM', work:'같이', partner:'문제해결', stress:'영상시청', career:'미정', grade:1 },
+  { name:'김아인', insta:'@ain_1226_', want:'프로젝트', domain:'피지컬AI', work:'같이', partner:'방향제시', stress:'영상시청', career:'취업', grade:1 },
+  { name:'심연우', insta:'@ynelysion_113', want:'프로젝트', domain:'LLM', work:'상황따라', partner:'방향제시', stress:'잠자기', career:'취업', grade:1 },
+  { name:'김민채', insta:'@mizchhae', want:'프로젝트', domain:'LLM', work:'같이', partner:'서포터', stress:'영상시청', career:'미정', grade:1 },
+  { name:'하진주', insta:'@1perl_e', want:'프로젝트', domain:'금융/경제', work:'상황따라', partner:'아이디어뱅크', stress:'영상시청', career:'취업', grade:1 },
+  { name:'조예원', insta:'@30nievv', want:'스터디', domain:'컴비전', work:'상황따라', partner:'아이디어뱅크', stress:'잠자기', career:'연구/대학원', grade:2 },
+  { name:'윤지원', insta:'@zydlin_', want:'스터디', domain:'금융/경제', work:'상황따라', partner:'아이디어뱅크', stress:'영상시청', career:'연구/대학원', grade:1 },
+  { name:'구연우', insta:'비공개', want:'커리어', domain:'바이오헬스', work:'상황따라', partner:'방향제시', stress:'영상시청', career:'취업', grade:2 },
+  { name:'서아영', insta:'@tdd_.05', want:'커리어', domain:'바이오헬스', work:'상황따라', partner:'문제해결', stress:'요리', career:'미정', grade:3 },
+  { name:'장지원', insta:'@ahihcussk', want:'스터디', domain:'피지컬AI', work:'혼자', partner:'아이디어뱅크', stress:'잠자기', career:'연구/대학원', grade:1 },
+  { name:'장유진', insta:'@bubblwe', want:'스터디', domain:'바이오헬스', work:'상황따라', partner:'문제해결', stress:'잠자기', career:'연구/대학원', grade:2 },
+  { name:'최다연', insta:'@cpekdus', want:'커리어', domain:'바이오헬스', work:'같이', partner:'서포터', stress:'운동하기', career:'창업', grade:1 },
+  { name:'김지원', insta:'@lwalr_', want:'스터디', domain:'금융/경제', work:'같이', partner:'서포터', stress:'운동하기', career:'취업', grade:1 },
+  { name:'조현아', insta:'@gys._.aa6', want:'프로젝트', domain:'피지컬AI', work:'상황따라', partner:'문제해결', stress:'잠자기', career:'취업', grade:2 },
+  { name:'계다연', insta:'@d0gekdus', want:'프로젝트', domain:'피지컬AI', work:'상황따라', partner:'방향제시', stress:'운동하기', career:'연구/대학원', grade:2 },
+  { name:'조수연', insta:'@su2yeun', want:'프로젝트', domain:'LLM', work:'상황따라', partner:'서포터', stress:'영상시청', career:'연구/대학원', grade:3 },
+  { name:'신이새', insta:'@shinishiyeo', want:'스터디', domain:'바이오헬스', work:'상황따라', partner:'방향제시', stress:'영상시청', career:'미정', grade:3 },
+  { name:'신채림', insta:'@chxrim_e', want:'스터디', domain:'LLM', work:'상황따라', partner:'방향제시', stress:'잠자기', career:'미정', grade:3 },
+  { name:'김단비', insta:'@efc._.ldl', want:'프로젝트', domain:'LLM', work:'혼자', partner:'아이디어뱅크', stress:'잠자기', career:'취업', grade:2 },
+  { name:'정하원', insta:'@h4.02w', want:'스터디', domain:'LLM', work:'같이', partner:'서포터', stress:'잠자기', career:'연구/대학원', grade:2 },
+  { name:'김가은', insta:'@kimgaeyn', want:'커리어', domain:'LLM', work:'상황따라', partner:'문제해결', stress:'잠자기', career:'연구/대학원', grade:2 },
+  { name:'송하윤', insta:'@nauonnx', want:'스터디', domain:'LLM', work:'같이', partner:'문제해결', stress:'잠자기', career:'취업', grade:1 },
+  { name:'이도연', insta:'@dywlee', want:'커리어', domain:'컴비전', work:'상황따라', partner:'아이디어뱅크', stress:'영상시청', career:'연구/대학원', grade:2 },
+  { name:'박예나', insta:'@pkynme', want:'프로젝트', domain:'컴비전', work:'혼자', partner:'방향제시', stress:'잠자기', career:'연구/대학원', grade:3 },
+  { name:'구민서', insta:'@99koo_99', want:'프로젝트', domain:'기후테크', work:'상황따라', partner:'방향제시', stress:'영상시청', career:'취업', grade:2 },
+  { name:'노가령', insta:'@gari_enpd', want:'스터디', domain:'피지컬AI', work:'상황따라', partner:'문제해결', stress:'영상시청', career:'미정', grade:1 },
+  { name:'김국경', insta:'@rrrggang._e', want:'스터디', domain:'피지컬AI', work:'상황따라', partner:'문제해결', stress:'잠자기', career:'미정', grade:1 },
+  { name:'김지윤', insta:'@r7eau', want:'스터디', domain:'바이오헬스', work:'상황따라', partner:'문제해결', stress:'잠자기', career:'취업', grade:1 },
+  { name:'오나연', insta:'@nxyonii_55', want:'커리어', domain:'피지컬AI', work:'혼자', partner:'서포터', stress:'영상시청', career:'취업', grade:2 },
 ];
 
 const QUESTIONS = [
-  { key:'name',   type:'text',   eyebrow:'Q U E S T I O N · 01', title:'이름이나 닉네임을\n알려줘요!',        hint:'결과 화면에 표시돼요 😊',      placeholder:'예) 민지, 클로버 등' },
-  { key:'collab', type:'single', eyebrow:'Q U E S T I O N · 02', title:'협업할 때\n나는 어떤 스타일?',       hint:'가장 잘 맞는 걸 골라줘요',     options:['방향 제시 리더 🧭','협력하는 서포터 🤝','몰입하는 문제 해결자 💡','소통 능력자 💬'] },
-  { key:'want',   type:'single', eyebrow:'Q U E S T I O N · 03', title:'소울메이트와\n뭘 하고 싶어요?',      hint:'가장 하고 싶은 걸 골라줘요',   options:['스터디 메이트 📚','프로젝트 파트너 🛠️','수다 떨 친구 ☕','커리어 고민을 나눌 동료 🌱'] },
-  { key:'domain', type:'single', eyebrow:'Q U E S T I O N · 04', title:'관심 있는\n도메인은?',              hint:'가장 흥미로운 분야를 골라줘요', options:['바이오 헬스 🧬','경제 📈','기후테크 🌍','미디어 🎬','로보틱스 🤖'] },
-  { key:'study',  type:'single', eyebrow:'Q U E S T I O N · 05', title:'나의 공부 스타일은?',              hint:'솔직하게 골라줘요 😄',          options:['아침형 🌅','밤형 🌙'] },
-  { key:'work',   type:'single', eyebrow:'Q U E S T I O N · 06', title:'작업할 때\n선호하는 방식은?',       hint:'혼자 vs 같이!',                options:['혼자 집중 🎧','같이 으쌰으쌰 👯'] },
-  { key:'free',   type:'single', eyebrow:'Q U E S T I O N · 07', title:'공강 시간엔\n주로 뭐 해요?',        hint:'평소 습관대로!',               options:['집에서 쉬기 🛋️','나가서 외출하기 🚶'] },
-  { key:'stress', type:'single', eyebrow:'Q U E S T I O N · 08', title:'스트레스 풀 때\n나는?',            hint:'가장 자주 하는 방법!',          options:['음식으로 해소 🍜','자기 😴','운동하기 🏃','유튜브 시청 📺','코딩으로 풀기 💻'] },
-  { key:'career', type:'single', eyebrow:'Q U E S T I O N · 09', title:'졸업 후\n1순위 희망 진로는?',       hint:'지금 생각하는 걸 골라줘요',    options:['취업 💼','연구 🔬','개발 👩‍💻','창업 🚀','대학원 🎓','미정 🤔'] },
+  { key:'name',    type:'text',   eyebrow:'Q U E S T I O N · 01', title:'이름을\n알려줘요!',                hint:'결과 화면에 표시돼요 😊',          placeholder:'예) 김민지' },
+  { key:'want',    type:'single', eyebrow:'Q U E S T I O N · 02', title:'어떤 파트너를\n찾고 있나요?',       hint:'가장 원하는 걸 골라줘요',           options:['스터디 파트너 📚','프로젝트/공모전 파트너 🛠️','커리어 고민을 나눌 파트너 🌱'] },
+  { key:'domain',  type:'single', eyebrow:'Q U E S T I O N · 03', title:'관심 있는\nAI 분야는?',            hint:'가장 흥미로운 분야를 골라줘요',      options:['바이오헬스 🧬','금융/경제 📈','기후테크 🌍','피지컬AI 🤖','LLM 💬','컴비전 👁️'] },
+  { key:'work',    type:'single', eyebrow:'Q U E S T I O N · 04', title:'작업/공부할 때\n선호하는 방식은?',  hint:'평소 스타일대로!',                  options:['혼자하는 걸 선호해요 🎧','같이하는 걸 선호해요 👯','상황에 따라 달라요 🔄'] },
+  { key:'partner', type:'single', eyebrow:'Q U E S T I O N · 05', title:'나는 어떤\n성향인가요?',            hint:'솔직하게 골라줘요 😊',              options:['방향제시 리더 🧭','협력하는 서포터 🤝','몰입하는 문제 해결자 💡','톡톡튀는 아이디어뱅크 ✨'] },
+  { key:'stress',  type:'single', eyebrow:'Q U E S T I O N · 06', title:'스트레스 풀 때\n나는?',            hint:'가장 자주 하는 방법!',              options:['잠자기 😴','운동하기 🏃','영상 시청하기 📺','요리 🍳'] },
+  { key:'career',  type:'single', eyebrow:'Q U E S T I O N · 07', title:'졸업 후\n1순위 희망 진로는?',       hint:'지금 생각하는 걸 골라줘요',         options:['취업 💼','연구/대학원 🎓','창업 🚀','미정 🤔'] },
+  { key:'grade',   type:'single', eyebrow:'Q U E S T I O N · 08', title:'몇 학년인가요?',                   hint:'학년이 비슷한 동료를 매칭해드려요!', options:['1학년 🌱','2학년 🌿','3학년 🍀','4학년 🌳'] },
 ];
 
-const WEIGHTS = { collab:3, want:3, domain:2, study:1, work:2, free:1, stress:1, career:2 };
-const CAREER_L = ['취업','연구','개발','창업','대학원','미정'];
-const DOMAIN_L = ['바이오 헬스','경제','기후테크','미디어','로보틱스'];
-const WANT_L   = ['스터디 메이트','프로젝트 파트너','수다 떨 친구','커리어 고민 동료'];
+const WEIGHTS = { want:3, domain:3, partner:2, career:2, work:1, stress:1 };
+const CAREER_L = ['취업','연구/대학원','창업','미정'];
+const DOMAIN_L = ['바이오헬스','금융/경제','기후테크','피지컬AI','LLM','컴비전'];
+const WANT_L   = ['스터디 파트너','프로젝트/공모전 파트너','커리어 고민 파트너'];
 
 function calcScore(user, s) {
   let sc=0, tot=0;
-  for (const k of Object.keys(WEIGHTS)) { tot+=WEIGHTS[k]; if(user[k]===s[k]) sc+=WEIGHTS[k]; }
+  for (const k of Object.keys(WEIGHTS)) {
+    tot += WEIGHTS[k];
+    if (user[k] === s[k]) sc += WEIGHTS[k];
+  }
+  // 학년 보너스: 같은 학년 +2, 1학년 차이 +1
+  const gradeDiff = Math.abs((user.grade||1) - s.grade);
+  if (gradeDiff === 0) sc += 2;
+  else if (gradeDiff === 1) sc += 1;
+  tot += 2;
   return Math.round(sc/tot*100);
 }
 
 function getMatchMsg(user, top) {
   const msgs=[];
-  if (user.career===top.career && user.career!==5) msgs.push(`둘 다 ${CAREER_L[user.career]}을(를) 꿈꾸고 있네요! 같이 준비해봐요 💪`);
-  if (user.domain===top.domain) msgs.push(`${DOMAIN_L[user.domain]} 분야에 진심인 두 분, 대화가 끊이지 않겠는데요? 🤓`);
-  if (user.study===top.study && user.work===top.work) {
-    msgs.push(`둘 다 ${user.study===0?'아침형':'밤형'}에 ${user.work===0?'혼자 집중':'같이 으쌰으쌰'} 스타일! 찰떡 파트너예요 ✨`);
-  }
-  if (user.want===top.want) msgs.push(`${WANT_L[user.want]}로 딱 맞아요! 이건 운명이에요 🍀`);
-  if (user.collab===top.collab) {
-    const cl=['방향 제시형','서포터형','문제 해결형','소통형'];
-    msgs.push(`둘 다 ${cl[user.collab]} 협업 스타일! 함께하면 시너지 폭발이에요 🚀`);
-  }
+  if (user.career===top.career && user.career!=='미정')
+    msgs.push(`둘 다 ${top.career}을(를) 꿈꾸고 있네요! 같이 준비해봐요 💪`);
+  if (user.domain===top.domain)
+    msgs.push(`${top.domain} 분야에 진심인 두 분, 대화가 끊이지 않겠는데요? 🤓`);
+  if (user.want===top.want)
+    msgs.push(`둘 다 ${top.want}를 원하고 있어요! 이건 운명이에요 🍀`);
+  if (user.partner===top.partner)
+    msgs.push(`같은 ${top.partner} 스타일! 함께하면 시너지 폭발이에요 🚀`);
+  if (user.work===top.work && user.work!=='상황따라')
+    msgs.push(`둘 다 ${top.work} 스타일로 작업해요! 찰떡 파트너예요 ✨`);
+  const gradeDiff = Math.abs((user.grade||1) - top.grade);
+  if (gradeDiff===0) msgs.push(`같은 ${top.grade}학년이에요! 더 가까이 소통할 수 있겠죠? 😊`);
   if (msgs.length===0) msgs.push('다른 듯 닮은 두 분, 서로에게 새로운 자극이 될 거예요! 🌟');
   return msgs[Math.floor(Math.random()*Math.min(msgs.length,2))];
 }
@@ -538,6 +583,19 @@ function showScreen(id) {
 }
 
 function startQuiz() { currentQ=0; answers={}; renderQ(); showScreen('s-quiz'); }
+
+function getVal(key, i) {
+  const map = {
+    want:    ['스터디','프로젝트','커리어'],
+    domain:  ['바이오헬스','금융/경제','기후테크','피지컬AI','LLM','컴비전'],
+    work:    ['혼자','같이','상황따라'],
+    partner: ['방향제시','서포터','문제해결','아이디어뱅크'],
+    stress:  ['잠자기','운동하기','영상시청','요리'],
+    career:  ['취업','연구/대학원','창업','미정'],
+    grade:   [1,2,3,4],
+  };
+  return map[key] ? map[key][i] : i;
+}
 
 function renderQ() {
   const q=QUESTIONS[currentQ], total=QUESTIONS.length;
@@ -564,7 +622,7 @@ function renderQ() {
       const d=document.createElement('div');
       d.className='opt'+(answers[q.key]===i?' sel':'');
       d.innerHTML=`<div class="opt-dot"></div><div class="opt-label">${label}</div>`;
-      d.onclick=()=>{ answers[q.key]=i; box.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel')); d.classList.add('sel'); updateNextBtn(); };
+      d.onclick=()=>{ answers[q.key]=getVal(q.key,i); box.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel')); d.classList.add('sel'); updateNextBtn(); };
       box.appendChild(d);
     });
   }
@@ -600,7 +658,7 @@ function showResult() {
         <div class="top-name">${top.name}</div>
         <div class="top-pct">${top.score}%</div>
       </div>
-      <div class="top-tags">${DOMAIN_L[top.domain]} · ${top.study===0?'아침형':'밤형'} · ${CAREER_L[top.career]}</div>
+      <div class="top-tags">${top.domain} · ${top.study===0?'아침형':'밤형'} · ${top.career}</div>
       <div class="top-insta">📸 ${top.insta||'비공개'}</div>
     </div>`;
 
@@ -615,7 +673,7 @@ function showResult() {
       <div class="rank-badge">${rank}</div>
       <div class="mcard-info">
         <div class="mcard-name">${s.name}</div>
-        <div class="mcard-tags">${DOMAIN_L[s.domain]} · ${s.study===0?'아침형':'밤형'} · ${CAREER_L[s.career]}</div>
+        <div class="mcard-tags">${s.domain} · ${s.study===0?'아침형':'밤형'} · ${s.career}</div>
         <div class="mcard-insta">📸 ${s.insta||'비공개'}</div>
       </div>
       <div class="mcard-pct">${s.score}%</div>`;
